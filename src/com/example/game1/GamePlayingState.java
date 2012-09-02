@@ -44,7 +44,7 @@ public class GamePlayingState extends State {
 	}
 	
 	private void processBackButton() {
-		StateManager.getInstance().switchState(StateType.GAME_HIGHSCORES);
+		StateManager.getInstance().switchState(StateType.MENU);
     }
 	
     @Override

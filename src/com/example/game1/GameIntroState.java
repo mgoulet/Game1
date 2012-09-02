@@ -18,8 +18,10 @@ public class GameIntroState extends State {
 		
 		//game scene
         Scene gameScene = new Scene();
-        gameScene.setBackground(new Background(1.0f, 1.0f, 1.0f));
+        //gameScene.setBackground(new Background(1.0f, 1.0f, 1.0f));
         SceneManager.getInstance().addScene(SceneType.GAME, gameScene);
+        
+        gameScene.setBackground(ResourceManager.getInstance().mStoneBackground);
         
 	}
 	
@@ -48,7 +50,7 @@ public class GameIntroState extends State {
 	
 	private void processBackButton() {
 
-		StateManager.getInstance().switchState(StateType.GAME_PLAYING);
+		StateManager.getInstance().switchState(StateType.MENU);
 
     }
 	

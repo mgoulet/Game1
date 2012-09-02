@@ -98,6 +98,7 @@ public class StateManager {
     	
     	//close off current state
     	this.stateMap.get(this.currentState).end();
+    	//getCurrentState().getScene().dispose();
     	
     	//switch current state id
     	this.currentState = newState;

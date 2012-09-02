@@ -100,8 +100,7 @@ public class MenuState extends State {
 	}
 	
 	private void processBackButton() {
-
-		StateManager.getInstance().switchState(StateType.OPTIONS);
+		System.exit(0);
 
     }
 
@@ -110,18 +109,13 @@ public class MenuState extends State {
 		
     	switch(pMenuItem.getID()) {
 			case MENU_PLAY:
-				// Restart the animation.
-				/*
-				this.mMainScene.reset();
-
-				// Remove the menu and reset it.
-				this.mMainScene.clearChildScene();
-				this.mMenuScene.reset();
-				*/
+				StateManager.getInstance().switchState(StateType.GAME_INTRO);
 				return true;
 			case MENU_QUIT:
 				// End Activity.
-				activityReference.finish();
+				ResourceManager.getInstance().unloadResources();
+				
+				System.exit(0);
 				return true;
 			default:
 				return false;

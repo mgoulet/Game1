@@ -37,13 +37,13 @@ public class MainActivity extends SimpleBaseGameActivity {
     	//return our current scene
     	StateManager.getInstance().initializeStateManager(this);
         return StateManager.getInstance().getCurrentState().getScene();
+
     }
     
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
     	//send key events to the current state
-    	return StateManager.getInstance().getCurrentState().onKeyDown(keyCode, event);
-
+    	return StateManager.getInstance().getCurrentState().onKeyDown(keyCode, event);   	
 	}
     
 }

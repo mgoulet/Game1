@@ -3,13 +3,12 @@ X Project Fall 2012: Android Game
 =====================================
 
 General Todos:
--Game surface (bricks or something, steal assets from sample for foundation)
 -Persistent options?
--Game idea :P
 -splashcreen: timer to change state to menu
 -rename MainActivity to something useful
 -rename ScreenManager -> SceneContainer
--release assets properly
+-add score text in game (HUD)
+-get choppa displayed with analog stick
 
 August 29th: (3 hrs)
 -Installed environment (new eclipse, droid sdk, etc..)
@@ -31,7 +30,7 @@ August 31st: (5 hrs)
 -Splashscreen contents (background + text)
 -Built EngineOptionsManager -> singleton
 
-September 1st: (4 hrs)
+September 1st: (4 hrs + 2)
 -Change all managers to reference the application instead of subcomponents...
 -Implement menu system
 -clean menu system
@@ -41,9 +40,9 @@ September 1st: (4 hrs)
 -replaced bitmap menu with text menu
 -add parallax background to menu
 -fix parallax background in menu (reset fixes backgrouhd, breaks menu options...)
-
-
-
+-fix crash on app restart (proper resource release)
+-fix menu music replay chose
+-drop in tiled textures in game scene
 
 
 

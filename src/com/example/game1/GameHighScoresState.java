@@ -43,7 +43,7 @@ public class GameHighScoresState extends State{
 	
 	private void processBackButton() {
 
-		StateManager.getInstance().switchState(StateType.SPLASH);
+		StateManager.getInstance().switchState(StateType.MENU);
 
     }
 	

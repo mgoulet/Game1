@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.andengine.audio.music.Music;
 import org.andengine.audio.music.MusicFactory;
+import org.andengine.entity.scene.background.RepeatingSpriteBackground;
 import org.andengine.opengl.font.BitmapFont;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.font.FontFactory;
@@ -11,6 +12,7 @@ import org.andengine.opengl.texture.ITexture;
 import org.andengine.opengl.texture.TextureOptions;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
+import org.andengine.opengl.texture.atlas.bitmap.source.AssetBitmapTextureAtlasSource;
 import org.andengine.opengl.texture.region.ITextureRegion;
 
 public class ResourceManager {
@@ -47,6 +49,7 @@ public class ResourceManager {
 	
 	//Text menu font
 	public Font mMenuFont;
+	ITexture fontTexture;
 		
 	//AutoParallax stuff for menu
 	public BitmapTextureAtlas mAutoParallaxBackgroundTexture;
@@ -54,6 +57,10 @@ public class ResourceManager {
 	public ITextureRegion mParallaxLayerBack;
 	public ITextureRegion mParallaxLayerMid;
 	public ITextureRegion mParallaxLayerFront;
+	
+	//game scene stuff
+	public BitmapTextureAtlas mGameBitmapTextureAtlas;
+	public RepeatingSpriteBackground mStoneBackground;
 	
 	//constructor
 	private ResourceManager(MainActivity activityReference) {
@@ -86,7 +93,7 @@ public class ResourceManager {
 		
 		//Menu font
 		FontFactory.setAssetBasePath("font/");
-		final ITexture fontTexture = new BitmapTextureAtlas(activityReference.getTextureManager(), 256, 256, TextureOptions.BILINEAR);
+		fontTexture = new BitmapTextureAtlas(activityReference.getTextureManager(), 256, 256, TextureOptions.BILINEAR);
 		this.mMenuFont = FontFactory.createFromAsset(activityReference.getFontManager(), fontTexture, activityReference.getAssets(), "Plok.ttf", 48, true, android.graphics.Color.WHITE);
 		this.mMenuFont.load();
 		
@@ -96,6 +103,11 @@ public class ResourceManager {
 		this.mParallaxLayerBack = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mAutoParallaxBackgroundTexture, activityReference, "parallax_background_layer_back.png", 0, 188);
 		this.mParallaxLayerMid = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mAutoParallaxBackgroundTexture, activityReference, "parallax_background_layer_mid.png", 0, 669);
 		this.mAutoParallaxBackgroundTexture.load();
+		
+		//game scene background stuff
+		mGameBitmapTextureAtlas = new BitmapTextureAtlas(activityReference.getTextureManager(), 128, 128);
+		mStoneBackground = new RepeatingSpriteBackground(EngineOptionsManager.getInstance().CAMERA_WIDTH, EngineOptionsManager.getInstance().CAMERA_HEIGHT, activityReference.getTextureManager(), AssetBitmapTextureAtlasSource.create(activityReference.getAssets(), "gfx/stone1.png"), activityReference.getVertexBufferObjectManager());
+		mGameBitmapTextureAtlas.load();
 		
 		//Music
 		MusicFactory.setAssetBasePath("mfx/");
@@ -109,6 +121,14 @@ public class ResourceManager {
 		return false;
 	}
 	
+	public void unloadResources() {
+		splashBitmapTextureAtlas.unload();
+		mMenuTexture.unload();
+		mAutoParallaxBackgroundTexture.unload();
+		fontTexture.unload();
+		
+	}
+	
 	public void playMenuMusic() {
 		if(!menuMusic.isPlaying()) {
 			menuMusic.play();
@@ -117,8 +137,10 @@ public class ResourceManager {
 	
 	public void stopMenuMusic() {
 		if(menuMusic.isPlaying()) {
-			menuMusic.stop();
+			menuMusic.pause();
 		}
 	}
 
 }
+
+

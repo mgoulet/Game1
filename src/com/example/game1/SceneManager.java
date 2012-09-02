@@ -41,7 +41,7 @@ public class SceneManager {
     public Scene getScene(SceneType sceneType) {
     	return sceneMap.get(sceneType);
     }
-	
+   
 }
 
 
