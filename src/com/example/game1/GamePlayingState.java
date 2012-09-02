@@ -25,7 +25,7 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import android.opengl.GLES20;
 import android.view.KeyEvent;
 
-import com.example.game1.SceneManager.SceneType;
+import com.example.game1.SceneContainer.SceneType;
 import com.example.game1.StateManager.StateType;
 
 public class GamePlayingState extends State {
@@ -36,7 +36,7 @@ public class GamePlayingState extends State {
 		//game scene
         Scene gameScene = new Scene();
         gameScene.setBackground(new Background(1.0f, 1.0f, 1.0f));
-        SceneManager.getInstance().addScene(SceneType.GAME, gameScene);
+        SceneContainer.getInstance().addScene(SceneType.GAME, gameScene);
         
 	}
 	

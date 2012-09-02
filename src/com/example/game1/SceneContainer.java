@@ -5,13 +5,13 @@ import java.util.Map;
 
 import org.andengine.entity.scene.Scene;
 
-public class SceneManager {
+public class SceneContainer {
 	
-	private static SceneManager instance;
+	private static SceneContainer instance;
 	
-	public static synchronized SceneManager getInstance() {
+	public static synchronized SceneContainer getInstance() {
 		if (instance == null) {
-			instance = new SceneManager();
+			instance = new SceneContainer();
 		}
 		return instance;
 	}
@@ -34,7 +34,7 @@ public class SceneManager {
     }
     
     //Constructor
-    private SceneManager() {
+    private SceneContainer() {
     	sceneMap = new HashMap<SceneType, Scene>();
     }
     

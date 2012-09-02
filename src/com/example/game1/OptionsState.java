@@ -7,7 +7,7 @@ import org.andengine.entity.scene.menu.item.IMenuItem;
 
 import android.view.KeyEvent;
 
-import com.example.game1.SceneManager.SceneType;
+import com.example.game1.SceneContainer.SceneType;
 import com.example.game1.StateManager.StateType;
 
 public class OptionsState extends State {
@@ -18,7 +18,7 @@ public class OptionsState extends State {
 		//options scene
         Scene optionsScene = new Scene();
         optionsScene.setBackground(new Background(0.0f, 0.0f, 1.0f));
-        SceneManager.getInstance().addScene(SceneType.OPTIONS, optionsScene);
+        SceneContainer.getInstance().addScene(SceneType.OPTIONS, optionsScene);
         
 	}
 	

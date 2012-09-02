@@ -8,7 +8,7 @@ import org.andengine.entity.scene.menu.item.IMenuItem;
 
 import android.view.KeyEvent;
 
-import com.example.game1.SceneManager.SceneType;
+import com.example.game1.SceneContainer.SceneType;
 import com.example.game1.StateManager.StateType;
 
 public class GameIntroState extends State {

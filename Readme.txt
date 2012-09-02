@@ -4,16 +4,14 @@ GAME TODOS (cool/fun stuff):
 =====================================
 -splashcreen: timer to change state to menu
 -add BRUTAL explosions to gamestate (left screen)
--add score text in game (HUD) (crazy timer)
--put game and menu in same scene to avoid glitches on parallax reset
+-add score text in game (HUD) (crazy timer & such)
+-change menu parallax
 
 STRUCTURAL TODOS:
 =====================================
 -rename MainActivity to something useful
--rename ScreenManager -> SceneContainer
 -move choppa automatically to match parallax
 -push composite resources into ResourceManager (from state sandboxes)
--refactor/cleanup resources name and such...
 
 DEV LOG:
 =====================================
@@ -51,13 +49,13 @@ September 1st: (6 hrs)
 -fix menu music replay chose
 -drop in tiled textures in game scene
 
-September 2nd: (1pm -  )
+September 2nd: (2.5 hrs)
 -rendered CHOPPA
 -render analog stick
 -control CHOPPA with analog stick
 -push parallax background to game state
 -proper release of scene children on state switches
 -flip choppa
-
-
+-refactor/cleanup resources name and such...
+-rename ScreenManager -> SceneContainer
 

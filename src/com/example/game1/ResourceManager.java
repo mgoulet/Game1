@@ -37,6 +37,8 @@ public class ResourceManager {
 		return instance;
 	}
 
+	private static final int FONT_SIZE = 48;
+	
 	//Application reference
 	private MainActivity activityReference;
 	
@@ -48,17 +50,20 @@ public class ResourceManager {
 	
 	//Textures
 	public BitmapTextureAtlas splashBitmapTextureAtlas;
-	public ITextureRegion splashFaceTextureRegion;
+	
 	
 	//Menu stuff
 	public BitmapTextureAtlas mMenuTexture;
 	public ITextureRegion mMenuPlayTextureRegion;
 	public ITextureRegion mMenuQuitTextureRegion;
 	
-	//Text menu font
-	public Font mMenuFont;
-	public ITexture fontTexture;
-		
+	//Fonts
+	public Font mDroidFont;
+	public Font mPlokFont;
+	public Font mNeverwinterNightsFont;
+	public Font mUnrealTournamenFont;
+	public Font mKingdomOfHeartsFont;
+
 	//AutoParallax stuff for menu
 	public BitmapTextureAtlas mAutoParallaxBackgroundTexture;
 
@@ -82,20 +87,43 @@ public class ResourceManager {
 	//constructor
 	private ResourceManager(MainActivity activityReference) {
 		this.activityReference = activityReference;
-		initializeResources();
+		
+		loadFonts();
+		loadTextures();
+		loadMusic();
+		
 	}
 	
-	//access the application
-	public MainActivity getActivityReference() {
-		return this.activityReference;
-	}
-	
-	private boolean initializeResources() {
+	private void loadFonts() {
+		
+		final ITexture droidFontTexture = new BitmapTextureAtlas(activityReference.getTextureManager(), 256, 256, TextureOptions.BILINEAR);
+		final ITexture kingdomOfHeartsFontTexture = new BitmapTextureAtlas(activityReference.getTextureManager(), 256, 256, TextureOptions.BILINEAR);
+		final ITexture neverwinterNightsFontTexture = new BitmapTextureAtlas(activityReference.getTextureManager(), 256, 256, TextureOptions.BILINEAR);
+		final ITexture plokFontTexture = new BitmapTextureAtlas(activityReference.getTextureManager(), 256, 256, TextureOptions.BILINEAR);
+		final ITexture unrealTournamentFontTexture = new BitmapTextureAtlas(activityReference.getTextureManager(), 256, 256, TextureOptions.BILINEAR);
 
-		//Textures
+		FontFactory.setAssetBasePath("font/");
+		this.mDroidFont = FontFactory.createFromAsset(activityReference.getFontManager(), droidFontTexture, activityReference.getAssets(), "Droid.ttf", FONT_SIZE, true, android.graphics.Color.WHITE);
+		this.mDroidFont.load();
+
+		this.mKingdomOfHeartsFont = FontFactory.createFromAsset(activityReference.getFontManager(), kingdomOfHeartsFontTexture, activityReference.getAssets(), "KingdomOfHearts.ttf", FONT_SIZE + 20, true, android.graphics.Color.WHITE);
+		this.mKingdomOfHeartsFont.load();
+
+		this.mNeverwinterNightsFont = FontFactory.createFromAsset(activityReference.getFontManager(), neverwinterNightsFontTexture, activityReference.getAssets(), "NeverwinterNights.ttf", FONT_SIZE, true, android.graphics.Color.WHITE);
+		this.mNeverwinterNightsFont.load();
+
+		this.mPlokFont = FontFactory.createFromAsset(activityReference.getFontManager(), plokFontTexture, activityReference.getAssets(), "Plok.ttf", FONT_SIZE, true, android.graphics.Color.WHITE);
+		this.mPlokFont.load();
+
+		this.mUnrealTournamenFont = FontFactory.createFromAsset(activityReference.getFontManager(), unrealTournamentFontTexture, activityReference.getAssets(), "UnrealTournament.ttf", FONT_SIZE, true, android.graphics.Color.WHITE);
+		this.mUnrealTournamenFont.load();
+		
+	}
+	
+	private void loadTextures() {
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
+
 		splashBitmapTextureAtlas  = new BitmapTextureAtlas(activityReference.getTextureManager(), 128, 128, TextureOptions.BILINEAR);
-		splashFaceTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(splashBitmapTextureAtlas, activityReference, "face_box.png", 0, 0);
 		splashBitmapTextureAtlas.load();
 		
 		//Menu stuff
@@ -107,12 +135,6 @@ public class ResourceManager {
 		//Bitmap Fonts for splash screen...
 		this.splashBitmapFont = new BitmapFont(activityReference.getTextureManager(), activityReference.getAssets(), "font/BitmapFont.fnt");
 		this.splashBitmapFont.load();
-		
-		//Menu font
-		FontFactory.setAssetBasePath("font/");
-		fontTexture = new BitmapTextureAtlas(activityReference.getTextureManager(), 256, 256, TextureOptions.BILINEAR);
-		this.mMenuFont = FontFactory.createFromAsset(activityReference.getFontManager(), fontTexture, activityReference.getAssets(), "LCD.ttf", 48, true, android.graphics.Color.WHITE);
-		this.mMenuFont.load();
 		
 		//Auto parallax background stuff
 		this.mAutoParallaxBackgroundTexture = new BitmapTextureAtlas(activityReference.getTextureManager(), 1024, 1024);
@@ -142,7 +164,15 @@ public class ResourceManager {
 		this.mOnScreenControlBaseTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mOnScreenControlTexture, activityReference, "onscreen_control_base.png", 0, 0);
 		this.mOnScreenControlKnobTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mOnScreenControlTexture, activityReference, "onscreen_control_knob.png", 128, 0);
 		this.mOnScreenControlTexture.load();
-		
+	}
+	
+	//access the application
+	public MainActivity getActivityReference() {
+		return this.activityReference;
+	}
+	
+	private boolean loadMusic() {
+
 		//Music
 		MusicFactory.setAssetBasePath("mfx/");
     	try {
@@ -153,14 +183,6 @@ public class ResourceManager {
     	}
 
 		return false;
-	}
-	
-	public void unloadResources() {
-		splashBitmapTextureAtlas.unload();
-		mMenuTexture.unload();
-		mAutoParallaxBackgroundTexture.unload();
-		fontTexture.unload();
-		
 	}
 	
 	public void playMenuMusic() {

@@ -7,7 +7,7 @@ import org.andengine.entity.scene.menu.item.IMenuItem;
 
 import android.view.KeyEvent;
 
-import com.example.game1.SceneManager.SceneType;
+import com.example.game1.SceneContainer.SceneType;
 
 public abstract class State  implements IOnMenuItemClickListener {
 	
@@ -34,7 +34,7 @@ public abstract class State  implements IOnMenuItemClickListener {
 	}
 	
 	public final Scene getScene() {
-		return (SceneManager.getInstance().getScene(this.sceneType));
+		return (SceneContainer.getInstance().getScene(this.sceneType));
 	}
 }
 

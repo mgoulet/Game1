@@ -19,7 +19,7 @@ import org.andengine.util.color.Color;
 import android.opengl.GLES20;
 import android.view.KeyEvent;
 
-import com.example.game1.SceneManager.SceneType;
+import com.example.game1.SceneContainer.SceneType;
 import com.example.game1.StateManager.StateType;
 
 public class MenuState extends State {
@@ -36,7 +36,7 @@ public class MenuState extends State {
 		//menu scene
     	Scene menuScene = new Scene();
     	
-    	menuScene.attachChild(new Text(230, 30, ResourceManager.getInstance().mMenuFont, "Droid Font", activityReference.getVertexBufferObjectManager()));
+    	menuScene.attachChild(new Text(230, 30, ResourceManager.getInstance().mDroidFont, "Droid Font", activityReference.getVertexBufferObjectManager()));
 		
     	
     	//menu options
@@ -53,18 +53,18 @@ public class MenuState extends State {
 		//add the parallax background to the MenuOptionsScene (not just the menu, otherwise this causes conflict)
 		menuOptionsScene.setBackground(autoParallaxBackground);
 		
-		SceneManager.getInstance().addScene(SceneType.MENU, menuScene);
+		SceneContainer.getInstance().addScene(SceneType.MENU, menuScene);
 
 	}
 	
 	private MenuScene createMenuOptionsScene() {
 		MenuScene menuOptionsScene = new MenuScene(EngineOptionsManager.getInstance().getCamera());
 		
-		final IMenuItem playMenuItem = new ColorMenuItemDecorator(new TextMenuItem(MENU_PLAY, ResourceManager.getInstance().mMenuFont, "PLAY", activityReference.getVertexBufferObjectManager()), new Color(1,0,0), new Color(1,1,1));
+		final IMenuItem playMenuItem = new ColorMenuItemDecorator(new TextMenuItem(MENU_PLAY, ResourceManager.getInstance().mDroidFont, "PLAY", activityReference.getVertexBufferObjectManager()), new Color(1,0,0), new Color(1,1,1));
 		playMenuItem.setBlendFunction(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA);
 		menuOptionsScene.addMenuItem(playMenuItem);
 
-		final IMenuItem quitMenuItem = new ColorMenuItemDecorator(new TextMenuItem(MENU_QUIT, ResourceManager.getInstance().mMenuFont, "QUIT", activityReference.getVertexBufferObjectManager()), new Color(1,0,0), new Color(1,1,1));
+		final IMenuItem quitMenuItem = new ColorMenuItemDecorator(new TextMenuItem(MENU_QUIT, ResourceManager.getInstance().mDroidFont, "QUIT", activityReference.getVertexBufferObjectManager()), new Color(1,0,0), new Color(1,1,1));
 		quitMenuItem.setBlendFunction(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA);
 		menuOptionsScene.addMenuItem(quitMenuItem);
 
@@ -118,8 +118,6 @@ public class MenuState extends State {
 				return true;
 			case MENU_QUIT:
 				// End Activity.
-				ResourceManager.getInstance().unloadResources();
-				
 				System.exit(0);
 				return true;
 			default:

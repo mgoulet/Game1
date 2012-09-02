@@ -12,7 +12,7 @@ import org.andengine.util.math.MathUtils;
 
 import android.view.KeyEvent;
 
-import com.example.game1.SceneManager.SceneType;
+import com.example.game1.SceneContainer.SceneType;
 import com.example.game1.StateManager.StateType;
 
 public class SplashState extends State {
@@ -23,7 +23,7 @@ public class SplashState extends State {
 		//create our splash scene
     	Scene splashScene = new Scene();
     	splashScene.setBackground(new Background(0.0f, 0.0f, 0.0f));
-    	SceneManager.getInstance().addScene(SceneType.SPLASH, splashScene);
+    	SceneContainer.getInstance().addScene(SceneType.SPLASH, splashScene);
     	
 	}
 	
@@ -34,12 +34,6 @@ public class SplashState extends State {
 	
 	@Override
 	public void begin() {
-		
-		//setup textures
-		final float x = (720 - ResourceManager.getInstance().splashFaceTextureRegion.getWidth()) * MathUtils.RANDOM.nextFloat();
-		final float y = (480 - ResourceManager.getInstance().splashFaceTextureRegion.getHeight()) * MathUtils.RANDOM.nextFloat();
-		final Sprite clickToUnload = new Sprite(x, y, ResourceManager.getInstance().splashFaceTextureRegion, ResourceManager.getInstance().getActivityReference().getVertexBufferObjectManager());
-		getScene().attachChild(clickToUnload);
 		
 		///setup font
 		final Text bitmapText = new Text(160, 230,
