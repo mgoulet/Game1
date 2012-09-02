@@ -12,8 +12,16 @@ import org.andengine.opengl.texture.ITexture;
 import org.andengine.opengl.texture.TextureOptions;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
+import org.andengine.opengl.texture.atlas.bitmap.BuildableBitmapTextureAtlas;
 import org.andengine.opengl.texture.atlas.bitmap.source.AssetBitmapTextureAtlasSource;
+import org.andengine.opengl.texture.atlas.bitmap.source.IBitmapTextureAtlasSource;
+import org.andengine.opengl.texture.atlas.buildable.builder.BlackPawnTextureAtlasBuilder;
+import org.andengine.opengl.texture.atlas.buildable.builder.ITextureAtlasBuilder.TextureAtlasBuilderException;
 import org.andengine.opengl.texture.region.ITextureRegion;
+import org.andengine.opengl.texture.region.TiledTextureRegion;
+import org.andengine.util.debug.Debug;
+
+import android.graphics.Color;
 
 public class ResourceManager {
 
@@ -49,7 +57,7 @@ public class ResourceManager {
 	
 	//Text menu font
 	public Font mMenuFont;
-	ITexture fontTexture;
+	public ITexture fontTexture;
 		
 	//AutoParallax stuff for menu
 	public BitmapTextureAtlas mAutoParallaxBackgroundTexture;
@@ -61,6 +69,15 @@ public class ResourceManager {
 	//game scene stuff
 	public BitmapTextureAtlas mGameBitmapTextureAtlas;
 	public RepeatingSpriteBackground mStoneBackground;
+	
+	//game entity sprites
+	public BuildableBitmapTextureAtlas mBitmapTextureAtlas;
+	public TiledTextureRegion mHelicopterTextureRegion;
+	
+	//analog controller stuff
+	public BitmapTextureAtlas mOnScreenControlTexture;
+	public ITextureRegion mOnScreenControlBaseTextureRegion;
+	public ITextureRegion mOnScreenControlKnobTextureRegion;
 	
 	//constructor
 	private ResourceManager(MainActivity activityReference) {
@@ -94,7 +111,7 @@ public class ResourceManager {
 		//Menu font
 		FontFactory.setAssetBasePath("font/");
 		fontTexture = new BitmapTextureAtlas(activityReference.getTextureManager(), 256, 256, TextureOptions.BILINEAR);
-		this.mMenuFont = FontFactory.createFromAsset(activityReference.getFontManager(), fontTexture, activityReference.getAssets(), "Plok.ttf", 48, true, android.graphics.Color.WHITE);
+		this.mMenuFont = FontFactory.createFromAsset(activityReference.getFontManager(), fontTexture, activityReference.getAssets(), "LCD.ttf", 48, true, android.graphics.Color.WHITE);
 		this.mMenuFont.load();
 		
 		//Auto parallax background stuff
@@ -108,6 +125,23 @@ public class ResourceManager {
 		mGameBitmapTextureAtlas = new BitmapTextureAtlas(activityReference.getTextureManager(), 128, 128);
 		mStoneBackground = new RepeatingSpriteBackground(EngineOptionsManager.getInstance().CAMERA_WIDTH, EngineOptionsManager.getInstance().CAMERA_HEIGHT, activityReference.getTextureManager(), AssetBitmapTextureAtlasSource.create(activityReference.getAssets(), "gfx/stone1.png"), activityReference.getVertexBufferObjectManager());
 		mGameBitmapTextureAtlas.load();
+		
+		//game entities
+		this.mBitmapTextureAtlas = new BuildableBitmapTextureAtlas(activityReference.getTextureManager(), 512, 256, TextureOptions.NEAREST);
+		this.mHelicopterTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(this.mBitmapTextureAtlas, activityReference, "helicopter_tiled.png", 2, 2);
+		
+		try {
+			this.mBitmapTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource, BitmapTextureAtlas>(0, 0, 1));
+			this.mBitmapTextureAtlas.load();
+		} catch (TextureAtlasBuilderException e) {
+			Debug.e(e);
+		}
+		
+		//analog controller stuff
+		this.mOnScreenControlTexture = new BitmapTextureAtlas(activityReference.getTextureManager(), 256, 128, TextureOptions.BILINEAR);
+		this.mOnScreenControlBaseTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mOnScreenControlTexture, activityReference, "onscreen_control_base.png", 0, 0);
+		this.mOnScreenControlKnobTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mOnScreenControlTexture, activityReference, "onscreen_control_knob.png", 128, 0);
+		this.mOnScreenControlTexture.load();
 		
 		//Music
 		MusicFactory.setAssetBasePath("mfx/");

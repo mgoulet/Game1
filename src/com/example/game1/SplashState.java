@@ -22,7 +22,7 @@ public class SplashState extends State {
 		
 		//create our splash scene
     	Scene splashScene = new Scene();
-    	splashScene.setBackground(new Background(1.0f, 0.0f, 0.0f));
+    	splashScene.setBackground(new Background(0.0f, 0.0f, 0.0f));
     	SceneManager.getInstance().addScene(SceneType.SPLASH, splashScene);
     	
 	}
@@ -44,7 +44,7 @@ public class SplashState extends State {
 		///setup font
 		final Text bitmapText = new Text(160, 230,
 				ResourceManager.getInstance().splashBitmapFont,
-				"WELCOME MUFFUGA!",
+				"SPLASH SCREEN.",
 				new TextOptions(HorizontalAlign.CENTER),
 				ResourceManager.getInstance().getActivityReference().getVertexBufferObjectManager());
 

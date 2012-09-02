@@ -1,5 +1,6 @@
 package com.example.game1;
 
+import org.andengine.engine.camera.hud.HUD;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.scene.menu.MenuScene;
@@ -15,14 +16,7 @@ public class GameIntroState extends State {
 	
 	public GameIntroState(MainActivity activityReference) {
 		super(activityReference);
-		
-		//game scene
-        Scene gameScene = new Scene();
-        //gameScene.setBackground(new Background(1.0f, 1.0f, 1.0f));
-        SceneManager.getInstance().addScene(SceneType.GAME, gameScene);
-        
-        gameScene.setBackground(ResourceManager.getInstance().mStoneBackground);
-        
+
 	}
 	
 	@Override
@@ -33,6 +27,7 @@ public class GameIntroState extends State {
 	@Override
 	public void begin() {
 		activityReference.getEngine().setScene(getScene());
+
 	}
 	
 	@Override
@@ -50,7 +45,7 @@ public class GameIntroState extends State {
 	
 	private void processBackButton() {
 
-		StateManager.getInstance().switchState(StateType.MENU);
+		StateManager.getInstance().switchState(StateType.GAME_PLAYING);
 
     }
 	

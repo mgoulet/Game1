@@ -11,6 +11,7 @@ import org.andengine.entity.scene.menu.item.SpriteMenuItem;
 import org.andengine.entity.scene.menu.item.TextMenuItem;
 import org.andengine.entity.scene.menu.item.decorator.ColorMenuItemDecorator;
 import org.andengine.entity.sprite.Sprite;
+import org.andengine.entity.text.Text;
 import org.andengine.entity.util.FPSLogger;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.util.color.Color;
@@ -35,6 +36,9 @@ public class MenuState extends State {
 		//menu scene
     	Scene menuScene = new Scene();
     	
+    	menuScene.attachChild(new Text(230, 30, ResourceManager.getInstance().mMenuFont, "Droid Font", activityReference.getVertexBufferObjectManager()));
+		
+    	
     	//menu options
     	MenuScene menuOptionsScene = createMenuOptionsScene();
     	menuScene.setChildScene(menuOptionsScene, false, true, true);
@@ -50,6 +54,7 @@ public class MenuState extends State {
 		menuOptionsScene.setBackground(autoParallaxBackground);
 		
 		SceneManager.getInstance().addScene(SceneType.MENU, menuScene);
+
 	}
 	
 	private MenuScene createMenuOptionsScene() {
@@ -81,7 +86,7 @@ public class MenuState extends State {
     	//trigger scene change at the engine level
     	//this.getScene().reset();
     	activityReference.getEngine().setScene(getScene());
-		
+    	
 	}
 	
 	@Override
@@ -109,7 +114,7 @@ public class MenuState extends State {
 		
     	switch(pMenuItem.getID()) {
 			case MENU_PLAY:
-				StateManager.getInstance().switchState(StateType.GAME_INTRO);
+				StateManager.getInstance().switchState(StateType.GAME_PLAYING);
 				return true;
 			case MENU_QUIT:
 				// End Activity.

@@ -1,15 +1,22 @@
-=====================================
 X Project Fall 2012: Android Game
 =====================================
-
-General Todos:
--Persistent options?
+GAME TODOS (cool/fun stuff):
+=====================================
 -splashcreen: timer to change state to menu
+-add BRUTAL explosions to gamestate (left screen)
+-add score text in game (HUD) (crazy timer)
+-put game and menu in same scene to avoid glitches on parallax reset
+
+STRUCTURAL TODOS:
+=====================================
 -rename MainActivity to something useful
 -rename ScreenManager -> SceneContainer
--add score text in game (HUD)
--get choppa displayed with analog stick
+-move choppa automatically to match parallax
+-push composite resources into ResourceManager (from state sandboxes)
+-refactor/cleanup resources name and such...
 
+DEV LOG:
+=====================================
 August 29th: (3 hrs)
 -Installed environment (new eclipse, droid sdk, etc..)
 -Get sample running
@@ -30,7 +37,7 @@ August 31st: (5 hrs)
 -Splashscreen contents (background + text)
 -Built EngineOptionsManager -> singleton
 
-September 1st: (4 hrs + 2)
+September 1st: (6 hrs)
 -Change all managers to reference the application instead of subcomponents...
 -Implement menu system
 -clean menu system
@@ -43,6 +50,14 @@ September 1st: (4 hrs + 2)
 -fix crash on app restart (proper resource release)
 -fix menu music replay chose
 -drop in tiled textures in game scene
+
+September 2nd: (1pm -  )
+-rendered CHOPPA
+-render analog stick
+-control CHOPPA with analog stick
+-push parallax background to game state
+-proper release of scene children on state switches
+-flip choppa
 
 
 
