@@ -9,33 +9,24 @@ import android.view.KeyEvent;
 
 import com.example.game1.SceneContainer.SceneType;
 
-public abstract class State  implements IOnMenuItemClickListener {
+public abstract class State {
 	
 	protected MainActivity activityReference;
-	
-	protected SceneType sceneType;
-	
+
 	public State(MainActivity activityReference) {
 		this.activityReference = activityReference;
 	}
-	
-	abstract public void initialize();
 
 	abstract public void begin();
 	
 	abstract public void end();
 
 	abstract public boolean onKeyDown(int keyCode, KeyEvent event);
-	
-	abstract public boolean onMenuItemClicked(final MenuScene pMenuScene, final IMenuItem pMenuItem, final float pMenuItemLocalX, final float pMenuItemLocalY);
 
-	public final SceneType getSceneType() {
-		return this.sceneType;
-	}
+	abstract public Scene getScene();
 	
-	public final Scene getScene() {
-		return (SceneContainer.getInstance().getScene(this.sceneType));
-	}
+	abstract public void setScene(Scene scene);
+	
 }
 
 

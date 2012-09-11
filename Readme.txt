@@ -3,15 +3,17 @@ X Project Fall 2012: Android Game
 GAME TODOS (cool/fun stuff):
 =====================================
 -splashcreen: timer to change state to menu
--add BRUTAL explosions to gamestate (left screen)
--add score text in game (HUD) (crazy timer & such)
 -change menu parallax
+-center assets as fct of variable screen size (text, overlays, etc...)
+-drop in chopper hells in list and animate them
+-loop hells across screen various speeds
+-wave system (add one chopper in the list each time)
 
 STRUCTURAL TODOS:
 =====================================
 -rename MainActivity to something useful
 -move choppa automatically to match parallax
--push composite resources into ResourceManager (from state sandboxes)
+-find a way to efficiently update timer value
 
 DEV LOG:
 =====================================
@@ -58,4 +60,20 @@ September 2nd: (2.5 hrs)
 -flip choppa
 -refactor/cleanup resources name and such...
 -rename ScreenManager -> SceneContainer
+
+September 4th: (1 hr)
+-add HUD (simple text)
+
+September 5th: (0.5 hrs)
+-game design/architecture
+
+September 10th: (4.5 hrs)
+-major refactoring
+-create scene classes
+-drop resources in appropriate scenes
+-added GameIntro scene with fading/shrinking text
+-extract scene-specific composite entities into their own scenes
+-updated chopper joe sprite, created hell chopper sprite
+-changed menu parallax
+
 

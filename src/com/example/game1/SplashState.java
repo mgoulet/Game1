@@ -17,57 +17,45 @@ import com.example.game1.StateManager.StateType;
 
 public class SplashState extends State {
 
+	//Our scene
+	protected SplashScene splashScene;
+	
 	public SplashState(MainActivity activityReference) {
 		super(activityReference);
-		
-		//create our splash scene
-    	Scene splashScene = new Scene();
-    	splashScene.setBackground(new Background(0.0f, 0.0f, 0.0f));
-    	SceneContainer.getInstance().addScene(SceneType.SPLASH, splashScene);
-    	
+   	
 	}
 	
 	@Override
-	public void initialize() {
-		this.sceneType = SceneType.SPLASH;
+	public Scene getScene() {
+		return this.splashScene;
+	}
+	
+	@Override
+	public void setScene(Scene scene) {
+		this.splashScene = (SplashScene)scene;
 	}
 	
 	@Override
 	public void begin() {
 		
-		///setup font
-		final Text bitmapText = new Text(160, 230,
-				ResourceManager.getInstance().splashBitmapFont,
-				"SPLASH SCREEN.",
-				new TextOptions(HorizontalAlign.CENTER),
-				ResourceManager.getInstance().getActivityReference().getVertexBufferObjectManager());
-
-		getScene().attachChild(bitmapText);
+		splashScene.prepareSceneForSplash();
 		
-		activityReference.getEngine().setScene(getScene());
+		activityReference.getEngine().setScene(splashScene);
 	}
 	
 	@Override
 	public void end() {
-		//empty
+		//Do nothing
+		
 	}
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
     	if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN)
     	{
-    		processBackButton();	
+    		StateManager.getInstance().switchState(StateType.MENU);	
     	}
 		
 		return true;
-	}
-	
-	private void processBackButton() {
-		StateManager.getInstance().switchState(StateType.MENU);
-    }
-	
-    @Override
-	public boolean onMenuItemClicked(final MenuScene pMenuScene, final IMenuItem pMenuItem, final float pMenuItemLocalX, final float pMenuItemLocalY) {
-		return false;
 	}
     
 }

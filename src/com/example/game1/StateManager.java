@@ -3,6 +3,10 @@ package com.example.game1;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.andengine.entity.scene.background.Background;
+
+import com.example.game1.SceneContainer.SceneType;
+
 public class StateManager {
 
 	private static StateManager instance;
@@ -49,37 +53,43 @@ public class StateManager {
 	
     private void initializeStates() {
     	
-    	//splash state
+    	//Splash scene
+    	SplashScene splashScene = new SplashScene(activityReference);
+    	SceneContainer.getInstance().addScene(SceneType.SPLASH, splashScene);
+    	
+    	//splash state    	
     	SplashState splashState = new SplashState(activityReference);
-    	splashState.initialize();
+    	splashState.setScene(splashScene);
     	
     	//menu scene
-    	MenuState menuState = new MenuState(activityReference);
-    	menuState.initialize();
+    	MenuSelectionScene menuSelectionScene = new MenuSelectionScene(activityReference);
+    	SceneContainer.getInstance().addScene(SceneType.MENU, menuSelectionScene);
     	
-        //options scene
-        OptionsState optionsState = new OptionsState(activityReference);
-        optionsState.initialize();
+    	//menu state
+    	MenuSelectionState menuSelectionState = new MenuSelectionState(activityReference);
+    	menuSelectionState.setScene(menuSelectionScene);
         
-        //game intro state
-        GameIntroState gameIntroState = new GameIntroState(activityReference);
-        gameIntroState.initialize();
-      
+    	//Create game scene
+    	GameScene gameScene = new GameScene(activityReference);
+    	SceneContainer.getInstance().addScene(SceneType.GAME, gameScene);
+    	
+    	//game intro
+    	GameIntroState gameIntroState = new GameIntroState(activityReference);
+        gameIntroState.setScene(gameScene);
+        
         //game playing state
         GamePlayingState gamePlayingState = new GamePlayingState(activityReference);
-        gamePlayingState.initialize();
+        gamePlayingState.setScene(gameScene);
+    	
         
-        //game high scores state
-        GameHighScoresState gameHighScoresState = new GameHighScoresState(activityReference);
-        gameHighScoresState.initialize();
-
         stateMap = new HashMap<StateType, State>();
         stateMap.put(StateType.SPLASH,  		splashState);
-        stateMap.put(StateType.MENU,  			menuState);
-        stateMap.put(StateType.OPTIONS,  		optionsState);
+        stateMap.put(StateType.MENU,  			menuSelectionState);
         stateMap.put(StateType.GAME_INTRO,  	gameIntroState);
         stateMap.put(StateType.GAME_PLAYING,  	gamePlayingState);
+        /*
         stateMap.put(StateType.GAME_HIGHSCORES, gameHighScoresState);
+        */
         
         //force a switch state to the first splashscreen
         this.switchState(StateType.SPLASH);
@@ -98,7 +108,6 @@ public class StateManager {
     	
     	//close off current state
     	this.stateMap.get(this.currentState).end();
-    	//getCurrentState().getScene().dispose();
     	
     	//switch current state id
     	this.currentState = newState;

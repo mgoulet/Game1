@@ -77,7 +77,8 @@ public class ResourceManager {
 	
 	//game entity sprites
 	public BuildableBitmapTextureAtlas mBitmapTextureAtlas;
-	public TiledTextureRegion mHelicopterTextureRegion;
+	public TiledTextureRegion mChopperJoeTextureRegion;
+	public TiledTextureRegion mChopperHellTextureRegion;
 	
 	//analog controller stuff
 	public BitmapTextureAtlas mOnScreenControlTexture;
@@ -139,7 +140,7 @@ public class ResourceManager {
 		//Auto parallax background stuff
 		this.mAutoParallaxBackgroundTexture = new BitmapTextureAtlas(activityReference.getTextureManager(), 1024, 1024);
 		this.mParallaxLayerFront = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mAutoParallaxBackgroundTexture, activityReference, "parallax_background_layer_front.png", 0, 0);
-		this.mParallaxLayerBack = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mAutoParallaxBackgroundTexture, activityReference, "parallax_background_layer_back.png", 0, 188);
+		this.mParallaxLayerBack = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mAutoParallaxBackgroundTexture, activityReference, "para_back2.png", 0, 188);
 		this.mParallaxLayerMid = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mAutoParallaxBackgroundTexture, activityReference, "parallax_background_layer_mid.png", 0, 669);
 		this.mAutoParallaxBackgroundTexture.load();
 		
@@ -150,7 +151,8 @@ public class ResourceManager {
 		
 		//game entities
 		this.mBitmapTextureAtlas = new BuildableBitmapTextureAtlas(activityReference.getTextureManager(), 512, 256, TextureOptions.NEAREST);
-		this.mHelicopterTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(this.mBitmapTextureAtlas, activityReference, "helicopter_tiled.png", 2, 2);
+		this.mChopperJoeTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(this.mBitmapTextureAtlas, activityReference, "helicopter_joe.png", 2, 2);
+		this.mChopperHellTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(this.mBitmapTextureAtlas, activityReference, "helicopter_hell.png", 2, 2);
 		
 		try {
 			this.mBitmapTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource, BitmapTextureAtlas>(0, 0, 1));
