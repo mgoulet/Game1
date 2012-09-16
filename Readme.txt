@@ -76,4 +76,13 @@ September 10th: (4.5 hrs)
 -updated chopper joe sprite, created hell chopper sprite
 -changed menu parallax
 
+September 11th: (10:20 - 11:20)
+-refactored Choppas into small hierarchy
+-refactored HUD
+-refactored analog controller
+
+
+
+
+
 
